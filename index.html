@@ -11,11 +11,19 @@
     <meta property="og:type" content="website" />
     <title>Harsh Kumar · Software Engineer</title>
     <style>
-      /* avoid white flash before CSS loads */
+      /* avoid flash before CSS loads — theme applied inline by script below */
       html { background: #050505; }
+      html[data-theme="light"] { background: #f1f5f9; }
     </style>
-    <script type="module" crossorigin src="/assets/index-CLQONcP2.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index--gn8zmyT.css">
+    <script>
+      try {
+        var t = localStorage.getItem('portfolio-theme') ||
+          (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        document.documentElement.dataset.theme = t
+      } catch(e) {}
+    </script>
+    <script type="module" crossorigin src="/assets/index-c313dBi-.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-eynPYb4t.css">
   </head>
   <body>
     <div id="root"></div>
