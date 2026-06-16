@@ -39,7 +39,7 @@ export default function BootSequence({ onDone }) {
     <AnimatePresence onExitComplete={onDone}>
       {!exiting && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-void"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-[#050505]"
           exit={{ opacity: 0, scale: 1.04 }}
           transition={{ duration: 0.6, ease: 'easeInOut' }}
           aria-label="Loading"
