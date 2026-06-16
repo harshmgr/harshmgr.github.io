@@ -134,74 +134,118 @@ body {
 .skill-node { cursor: pointer; transition: opacity 0.25s ease; }
 .skill-link { transition: opacity 0.25s ease, stroke 0.25s ease; }
 
-/* ── light theme ───────────────────────────── */
+/* ── light theme (warm stone — no blue background) ─────────────────── */
 [data-theme="light"] {
   color-scheme: light;
-  --color-gray-300: #1e293b;
-  --color-gray-400: #334155;
-  --color-gray-500: #475569;
-  --color-gray-600: #64748b;
-  --color-gray-700: #94a3b8;
-  --color-void: #c8d8ec;
-  --color-panel: #ffffff;
+  --color-gray-200: #2d2d2d;
+  --color-gray-300: #1c1c1e;
+  --color-gray-400: #3a3a3c;
+  --color-gray-500: #636366;
+  --color-gray-600: #8e8e93;
+  --color-gray-700: #aeaeb2;
+  --color-void: #e0dbd3;
+  --color-panel: #f5f3ef;
+  /* remap accent tokens so every cyan/electric utility auto-shifts */
+  --color-electric: #4f46e5;
+  --color-cyan: #0d9488;
+  --color-cyan-300: #0f766e;
+  --color-cyan-400: #0d9488;
+  --color-emerald-400: #059669;
+  --color-violet: #6d28d9;
 }
 
 [data-theme="light"] body {
-  background: linear-gradient(145deg, #c2d4ea 0%, #cfddf0 50%, #c4d6ec 100%);
+  background: linear-gradient(160deg, #dedad2 0%, #e6e2d8 40%, #d8d4cc 100%);
   background-attachment: fixed;
-  color: #0f172a;
+  color: #1c1c1e;
 }
 
-[data-theme="light"] .text-white { color: #0f172a; }
+[data-theme="light"] .text-white { color: #1c1c1e; }
 
-/* glass panels — white with visible depth */
+/* glass — frosted warm white panels with dark borders */
 [data-theme="light"] .glass {
-  background: rgba(255, 255, 255, 0.72);
-  border-color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 4px 24px -4px rgba(30, 60, 110, 0.12), 0 1px 4px rgba(0,0,0,0.06);
+  background: rgba(250, 248, 244, 0.82);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 16px -4px rgba(0, 0, 0, 0.10), 0 1px 3px rgba(0,0,0,0.05);
 }
 [data-theme="light"] .glass-hover:hover {
-  border-color: rgba(59, 130, 246, 0.5);
+  border-color: rgba(99, 102, 241, 0.45);
   box-shadow:
-    0 0 0 1px rgba(59, 130, 246, 0.15),
-    0 8px 40px -8px rgba(59, 130, 246, 0.25),
-    0 2px 12px rgba(0,0,0,0.06);
+    0 0 0 1px rgba(99, 102, 241, 0.12),
+    0 8px 32px -8px rgba(99, 102, 241, 0.18),
+    0 2px 8px rgba(0,0,0,0.06);
 }
 
-[data-theme="light"] .bg-white\/5          { background-color: rgba(255,255,255,0.4); }
-[data-theme="light"] .bg-white\/\[0\.03\]  { background-color: rgba(255,255,255,0.3); }
-[data-theme="light"] .bg-black\/40         { background-color: rgba(255,255,255,0.5); }
-[data-theme="light"] .border-white\/10     { border-color: rgba(255,255,255,0.7); }
-[data-theme="light"] .border-white\/5      { border-color: rgba(255,255,255,0.5); }
-[data-theme="light"] .bg-black\/60         { background-color: rgba(15, 25, 50, 0.55); }
+/* bg helpers used inside cards */
+[data-theme="light"] .bg-white\/5         { background-color: rgba(0,0,0,0.03); }
+[data-theme="light"] .bg-white\/\[0\.03\] { background-color: rgba(0,0,0,0.02); }
+[data-theme="light"] .bg-black\/40        { background-color: rgba(0,0,0,0.04); }
+[data-theme="light"] .border-white\/10    { border-color: rgba(0,0,0,0.07); }
+[data-theme="light"] .border-white\/5     { border-color: rgba(0,0,0,0.04); }
+/* command palette overlay stays dark */
+[data-theme="light"] .bg-black\/60        { background-color: rgba(10, 10, 12, 0.52); }
 
-/* grid backdrop */
+/* grid backdrop — warm neutral lines */
 [data-theme="light"] .grid-backdrop {
   background-image:
-    linear-gradient(rgba(30, 80, 160, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(30, 80, 160, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
   mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 75%);
 }
 
-/* gray-200 used in terminal command text */
-[data-theme="light"] { --color-gray-200: #1e293b; }
+/* glow text — tone down for light bg */
+[data-theme="light"] .glow-blue { text-shadow: 0 0 20px rgba(99, 102, 241, 0.35); }
+[data-theme="light"] .glow-cyan { text-shadow: 0 0 20px rgba(20, 184, 166, 0.35); }
 
-/* SVG connector lines */
-[data-theme="light"] .skill-link { stroke: #93b4d8; }
-[data-theme="light"] #architecture svg line:not(.flow-line) { stroke: #a8c4de; }
+/* gradient-text for name — shift to indigo/teal, more legible on warm bg */
+[data-theme="light"] .gradient-text {
+  background: linear-gradient(90deg, #4f46e5, #0d9488, #7c3aed);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
-/* Architecture node labels — white fill invisible on light glass */
-[data-theme="light"] #architecture text { fill: #1e293b; }
-/* Architecture node box fills — boost opacity so tints show on white */
-[data-theme="light"] #architecture rect { fill-opacity: 0.35; }
+/* SVG lines in diagrams */
+[data-theme="light"] .skill-link { stroke: #b5afa7; }
+[data-theme="light"] #architecture svg line:not(.flow-line) { stroke: #c0b8ae; }
 
-/* Skills node circles — swap dark fill for a soft white in light mode */
-[data-theme="light"] .skill-node circle:last-of-type { fill: #f8fafc; }
+/* Architecture node labels (white fill → dark text) */
+[data-theme="light"] #architecture text { fill: #1c1c1e; }
+[data-theme="light"] #architecture rect  { fill-opacity: 0.28; }
+
+/* Skills nodes — warm off-white fill */
+[data-theme="light"] .skill-node circle:last-of-type { fill: #f5f3ef; }
+
+/* accent colour overrides — replace neon cyan/electric with muted indigo/teal */
+[data-theme="light"] .text-cyan-400  { color: #0d9488; }
+[data-theme="light"] .text-cyan-300  { color: #4f46e5; }
+[data-theme="light"] .text-electric  { color: #4f46e5; }
+[data-theme="light"] .text-cyan-300\/80 { color: rgba(79, 70, 229, 0.8); }
+[data-theme="light"] .text-emerald-400  { color: #059669; }
+[data-theme="light"] .text-violet-300\/90 { color: rgba(109, 40, 217, 0.9); }
+
+/* nav active pill */
+[data-theme="light"] .bg-cyan-400\/10  { background-color: rgba(79, 70, 229, 0.08); }
+[data-theme="light"] .border-cyan-400\/20 { border-color: rgba(79, 70, 229, 0.2); }
+
+/* project tag chips */
+[data-theme="light"] .text-cyan-300\/80 { color: rgba(13, 148, 136, 0.9); }
+[data-theme="light"] .bg-cyan-400\/8    { background-color: rgba(13, 148, 136, 0.06); }
+[data-theme="light"] .border-cyan-400\/15 { border-color: rgba(13, 148, 136, 0.18); }
+
+/* caret — use indigo in light mode */
+[data-theme="light"] .caret::after { color: #4f46e5; }
+
+/* progress bar gradient */
+[data-theme="light"] .from-electric { --tw-gradient-from: #4f46e5; }
+[data-theme="light"] .to-violet      { --tw-gradient-to: #7c3aed; }
+[data-theme="light"] .via-cyan-400   { --tw-gradient-via: #0d9488; }
 
 /* scrollbar */
-[data-theme="light"] ::-webkit-scrollbar-track { background: #c8d8ec; }
+[data-theme="light"] ::-webkit-scrollbar-track { background: #e0dbd3; }
 [data-theme="light"] ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #3b82f6, #0891b2);
+  background: linear-gradient(180deg, #4f46e5, #0d9488);
 }
 
 @media (prefers-reduced-motion: reduce) {
