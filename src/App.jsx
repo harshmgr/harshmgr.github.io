@@ -7,6 +7,23 @@ import Hero from './components/Hero'
 import About from './components/About'
 import { profile } from './config'
 
+function useTheme() {
+  const [theme, setTheme] = useState(() => {
+    try {
+      const saved = localStorage.getItem('portfolio-theme')
+      if (saved) return saved
+    } catch { /* private mode */ }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  })
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    try { localStorage.setItem('portfolio-theme', theme) } catch { /* private mode */ }
+  }, [theme])
+
+  return [theme, () => setTheme(t => t === 'dark' ? 'light' : 'dark')]
+}
+
 // Below-the-fold sections are lazy-loaded to keep first paint light.
 const Skills = lazy(() => import('./components/Skills'))
 const Projects = lazy(() => import('./components/Projects'))
@@ -21,6 +38,7 @@ const seenBoot = () => {
 }
 
 export default function App() {
+  const [theme, toggleTheme] = useTheme()
   // show the boot sequence once per browser session
   const [booted, setBooted] = useState(seenBoot)
   const [paletteOpen, setPaletteOpen] = useState(false)
@@ -59,7 +77,7 @@ export default function App() {
         aria-hidden="true"
       />
 
-      <Navbar onOpenPalette={() => setPaletteOpen(true)} />
+      <Navbar onOpenPalette={() => setPaletteOpen(true)} theme={theme} onToggleTheme={toggleTheme} />
       <CommandPalette open={paletteOpen} setOpen={setPaletteOpen} />
       {snakeOpen && (
         <Suspense fallback={null}>

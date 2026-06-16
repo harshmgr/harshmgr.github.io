@@ -2,7 +2,24 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { sections, profile } from '../config'
 
-export default function Navbar({ onOpenPalette }) {
+function SunIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+    </svg>
+  )
+}
+
+function MoonIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+  )
+}
+
+export default function Navbar({ onOpenPalette, theme, onToggleTheme }) {
   const [active, setActive] = useState('home')
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
@@ -87,6 +104,13 @@ export default function Navbar({ onOpenPalette }) {
         </ul>
 
         <div className="flex items-center gap-2">
+          <button
+            onClick={onToggleTheme}
+            className="flex items-center justify-center w-8 h-8 rounded-lg text-gray-400 hover:text-cyan-300 transition-colors glass"
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          </button>
           <button
             onClick={onOpenPalette}
             className="hidden sm:flex items-center gap-2 font-mono text-xs text-gray-400 glass px-3 py-1.5 hover:text-cyan-300 transition-colors"
